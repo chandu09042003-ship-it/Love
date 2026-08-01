@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For My Bubu 💕</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a050d;
+      --bg-light: #fcf4f6;
+      --pink-main: #ff4d6d;
+      --pink-soft: #ff8fa3;
+      --pink-cream: #ffe5ec;
+      --text-dark: #2b1820;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-dark);
+      color: #ffffff;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* HEART CURSOR TRAIL */
+    .cursor-heart {
+      position: fixed;
+      pointer-events: none;
+      color: var(--pink-main);
+      font-size: 16px;
+      z-index: 9999;
+      animation: fadeAndFly 1s forwards ease-out;
+    }
+
+    @keyframes fadeAndFly {
+      0% { transform: translate(-50%, -50%) scale(1); opacity: 1; filter: drop-shadow(0 0 5px var(--pink-main)); }
+      100% { transform: translate(-50%, -45px) scale(0.3); opacity: 0; }
+    }
+
+    /* Floating Background Particles */
+    .particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 99;
+      animation: floatUp 7s linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(105vh) scale(0.6) rotate(0deg); opacity: 0; }
+      20% { opacity: 0.8; }
+      80% { opacity: 0.8; }
+      100% { transform: translateY(-10vh) scale(1.1) rotate(360deg); opacity: 0; }
+    }
+
+    /* SCENE 0: MATRIX + PARTICLE COUNTDOWN ANIMATION */
+    #matrix-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #050207;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    #matrix-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .skip-btn {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      background: rgba(255, 77, 109, 0.2);
+      border: 1px solid rgba(255, 77, 109, 0.5);
+      color: var(--pink-soft);
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      backdrop-filter: blur(5px);
+      z-index: 1001;
+      transition: all 0.3s;
+    }
+
+    .skip-btn:hover {
+      background: var(--pink-main);
+      color: white;
+    }
+
+    /* SCENE 1: INTRO LANDING */
+    #intro-screen {
+      display: none;
+      height: 100vh;
+      background-color: var(--bg-dark);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .pulsing-heart {
+      font-size: 3rem;
+      color: var(--pink-main);
+      animation: heartPulse 1.4s ease-in-out infinite;
+      margin-bottom: 20px;
+    }
+
+    @keyframes heartPulse {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px var(--pink-main)); }
+      50% { transform: scale(1.3); filter: drop-shadow(0 0 25px var(--pink-main)); }
+    }
+
+    .btn-pink {
+      background: linear-gradient(135deg, #ff4d6d, #ff758f);
+      color: white;
+      border: none;
+      padding: 12px 35px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(255, 77, 109, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .btn-pink:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 6px 25px rgba(255, 77, 109, 0.6);
+    }
+
+    /* SCENE 2: MAIN SITE WRAPPER */
+    #main-wrapper {
+      display: none;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      min-height: 100vh;
+      padding: 40px 15px;
+    }
+
+    .container { max-width: 680px; margin: 0 auto; }
+
+    .section-tag {
+      text-align: center;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #a08090;
+      margin-top: 60px;
+      margin-bottom: 5px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--text-dark);
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+
+    /* Hero Card */
+    .hero-card {
+      background: white;
+      border-radius: 24px;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(255, 182, 193, 0.2);
+      margin-bottom: 40px;
+    }
+
+    .hero-big-heart {
+      width: 160px;
+      height: 160px;
+      background: linear-gradient(135deg, #ff758f, #ff4d6d);
+      margin: 0 auto 20px auto;
+      clip-path: path('M 80,140 C 80,140 10,90 10,45 A 35,35 0 0,1 80,28 A 35,35 0 0,1 150,45 C 150,90 80,140 80,140 Z');
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-big-heart span {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: rgb(228, 14, 14);
+      font-size: 2.2rem;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      color: var(--pink-main);
+      margin-bottom: 10px;
+    }
+
+    /* Envelope Letter */
+    .envelope-box {
+      background: #fdf8fa;
+      border: 1px solid #f3e1e7;
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.02);
+      transition: all 0.4s ease;
+    }
+
+    .envelope-icon {
+      width: 70px;
+      height: 50px;
+      background: var(--pink-soft);
+      border-radius: 8px;
+      margin: 0 auto 15px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .letter-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      line-height: 1.8;
+      text-align: left;
+      color: #4a323d;
+      margin-top: 0;
+    }
+
+    .envelope-box.open .letter-content {
+      max-height: 600px;
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px dashed #eed5df;
+    }
+
+    /* Polaroid Memory Cards */
+    .polaroid-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .polaroid-card {
+      background: white;
+      padding: 10px 10px 15px 10px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+      text-align: center;
+      transform: rotate(calc(var(--r, 0) * 1deg));
+      transition: transform 0.3s;
+    }
+
+    .polaroid-card:hover { transform: scale(1.05) rotate(0deg); z-index: 5; }
+
+    .polaroid-img {
+      width: 100%; height: 110px;
+      background-color: var(--pink-cream);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; margin-bottom: 8px;
+    }
+
+    .polaroid-caption { font-family: 'Caveat', cursive; font-size: 1.1rem; color: #664455; }
+
+    /* Reasons Flip Cards Grid */
+    .reasons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .flip-card { height: 100px; perspective: 1000px; cursor: pointer; }
+    .flip-inner {
+      position: relative; width: 100%; height: 100%;
+      text-align: center; transition: transform 0.6s;
+      transform-style: preserve-3d; border-radius: 16px;
+    }
+    .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+    .flip-front, .flip-back {
+      position: absolute; width: 100%; height: 100%;
+      backface-visibility: hidden; border-radius: 16px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px;
+    }
+    .flip-front { background: white; color: var(--pink-main); box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+    .flip-back { background: var(--pink-main); color: white; transform: rotateY(180deg); font-size: 0.75rem; line-height: 1.3; }
+
+    /* Time Counter */
+    .counter-flex { display: flex; justify-content: space-between; gap: 8px; margin-top: 20px; }
+    .counter-item { flex: 1; background: white; padding: 15px 5px; border-radius: 16px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+    .counter-num { font-size: 1.5rem; font-weight: 600; color: var(--pink-main); }
+    .counter-lbl { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: #997788; margin-top: 2px; }
+
+    /* Heart Trace SVG */
+    .trace-container { text-align: center; margin-top: 20px; }
+    svg.heart-trace { width: 220px; height: 200px; cursor: pointer; }
+    .heart-path-line {
+      fill: none; stroke: var(--pink-main); stroke-width: 2.5;
+      stroke-dasharray: 1000; stroke-dashoffset: 1000; transition: stroke-dashoffset 2.5s ease-in-out;
+    }
+
+    /* Quiz Container */
+    .quiz-card { background: white; border-radius: 20px; padding: 25px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+    .quiz-btn {
+      background: #fbf0f4; border: 1px solid #f3dbe3; padding: 12px; margin: 8px 0;
+      border-radius: 30px; font-size: 0.9rem; color: var(--text-dark); cursor: pointer; transition: all 0.3s;
+    }
+    .quiz-btn:hover, .quiz-btn.selected { background: var(--pink-main); color: white; border-color: var(--pink-main); }
+
+    /* LOVE MEMORY CARD GAME CSS */
+    #game-box {
+      width: 100%;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 25px 15px;
+      margin-top: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+    .memory-card {
+      height: 75px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+    .memory-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.5s;
+      transform-style: preserve-3d;
+      border-radius: 12px;
+    }
+    .memory-card.flipped .memory-card-inner,
+    .memory-card.matched .memory-card-inner {
+      transform: rotateY(180deg);
+    }
+    .memory-card-front, .memory-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    }
+    .memory-card-front {
+      background: #fff0f4;
+      color: var(--pink-main);
+      border: 1px solid #f3dbe3;
+      font-size: 1.2rem;
+    }
+    .memory-card-back {
+      background: linear-gradient(135deg, #ff758f, #ff4d6d);
+      color: white;
+      transform: rotateY(180deg);
+    }
+
+    /* End Screen */
+    #end-screen {
+      display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: var(--bg-dark); z-index: 1000; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px;
+    }
+    canvas#fireworks-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <div id="particle-root"></div>
+
+  <!-- AUDIO ELEMENT pointing to relative path -->
+  <audio id="bg-audio" loop>
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- SCENE 0: MATRIX & PARTICLE ANIMATION INTRO -->
+  <div id="matrix-screen" onclick="startSongAndAudio()">
+    <canvas id="matrix-canvas"></canvas>
+    <button class="skip-btn" onclick="finishIntroAnimation(event)">Skip Intro ➔</button>
+  </div>
+
+  <!-- SCENE 1: INTRO LANDING -->
+  <div id="intro-screen">
+    <div class="pulsing-heart">♥</div>
+    <div style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; color: #e0c2ce; margin-bottom: 8px;">For My Bubu...</div>
+    <div style="font-family: 'Playfair Display', serif; font-size: 2.3rem; font-weight: 600; margin-bottom: 30px;">Smile</div>
+    <button class="btn-pink" onclick="enterSite()">Open Your Surprise 💕</button>
+  </div>
+
+  <!-- SCENE 2: MAIN SITE -->
+  <div id="main-wrapper">
+    <div class="container">
+
+      <div class="section-tag">My Handsome Boy 💕</div>
+
+      <!-- Hero Card -->
+      <div class="hero-card">
+        <div class="hero-big-heart">
+          <span>For</span>
+        </div>
+        <div class="hero-name">ADVANCE HAPPY BIRTHDAY 💕</div>
+        <p style="color: #775566; font-size: 0.9rem;">You make my life sweeter and brighter every single day.</p>
+        <p style="font-family: 'Playfair Display', serif; font-style: italic; color: #a07085; font-size: 0.85rem; margin-top: 15px;">SCROLL DOWN ↓</p>
+      </div>
+
+      <!-- Envelope Letter -->
+      <div class="section-tag">A LITTLE NOTE</div>
+      <div class="section-title">A Letter, Just For You</div>
+      <div class="envelope-box" onclick="this.classList.toggle('open')">
+        <div class="envelope-icon">✉️</div>
+        <p style="color: #886677; font-size: 0.85rem;">Tap the envelope to open it</p>
+        <div class="letter-content">
+          To my favorite person,<br><br>
+          Thank you for being my anchor, my best friend, and my biggest supporter. You make me feel safe, happy, and loved in ways words can't fully express.<br><br>
+          I am so grateful to have you in my life.<br><br>
+          Happy Boyfriend's Day, my love.<br><br>
+          <em style="color: var(--pink-main);">— Always yours ♥</em>
+        </div>
+      </div>
+
+      <!-- Polaroid Memory Cards -->
+      <div class="section-tag">OUR MOMENTS</div>
+      <div class="section-title">Little Pieces of Us</div>
+      <div class="polaroid-grid">
+        <div class="polaroid-card" style="--r: -3">
+          <div class="polaroid-img">📸</div>
+          <div class="polaroid-caption">our first date</div>
+        </div>
+        <div class="polaroid-card" style="--r: 2">
+          <div class="polaroid-img">🚗</div>
+          <div class="polaroid-caption">late drives</div>
+        </div>
+        <div class="polaroid-card" style="--r: -2">
+          <div class="polaroid-img">🍔</div>
+          <div class="polaroid-caption">food dates</div>
+        </div>
+        <div class="polaroid-card" style="--r: 4">
+          <div class="polaroid-img">🎧</div>
+          <div class="polaroid-caption">vibe sessions</div>
+        </div>
+      </div>
+
+      <!-- Reasons Flip Cards Grid -->
+      <div class="section-tag">30 LITTLE TRUTHS</div>
+      <div class="section-title">Reasons I Love You</div>
+      <p style="text-align: center; color: #886677; font-size: 0.8rem; margin-bottom: 15px;">Flip each card, one sweet reason at a time.</p>
+
+      <div class="reasons-grid">
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner"><div class="flip-front">💖</div><div class="flip-back">How safe I feel whenever I am with you</div></div>
+        </div>
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner"><div class="flip-front">✨</div><div class="flip-back">The way you always know how to make me smile</div></div>
+        </div>
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner"><div class="flip-front">🌸</div><div class="flip-back">Your warm and comforting hugs</div></div>
+        </div>
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner"><div class="flip-front">🌙</div><div class="flip-back">Our late night talks and deep laughs</div></div>
+        </div>
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner"><div class="flip-front">🦋</div><div class="flip-back">Your kind heart and sweet soul</div></div>
+        </div>
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner"><div class="flip-front">🎀</div><div class="flip-back">Simply because you are my favorite person</div></div>
+        </div>
+      </div>
+
+      <!-- Time Counter -->
+      <div class="section-tag">SINCE THE DAY WE MET</div>
+      <div class="section-title">We Have Loved Each Other For</div>
+      <div class="counter-flex">
+        <div class="counter-item"><div class="counter-num">3</div><div class="counter-lbl">Years</div></div>
+        <div class="counter-item"><div class="counter-num">5</div><div class="counter-lbl">Months</div></div>
+        <div class="counter-item"><div class="counter-num">17</div><div class="counter-lbl">Days</div></div>
+        <div class="counter-item"><div class="counter-num">14</div><div class="counter-lbl">Hours</div></div>
+        <div class="counter-item"><div class="counter-num">54</div><div class="counter-lbl">Mins</div></div>
+        <div class="counter-item"><div class="counter-num" id="cnt-secs">00</div><div class="counter-lbl">Secs</div></div>
+      </div>
+
+      <!-- Heart Trace SVG -->
+      <div class="section-tag">MADE OF A THOUSAND LITTLE HEARTS</div>
+      <div class="section-title">Just Like My Feelings For You</div>
+      <div class="trace-container">
+        <svg class="heart-trace" viewBox="0 0 100 100" onclick="traceHeart()">
+          <path id="svg-heart-path" class="heart-path-line" d="M 50,30 A 20,20 0 0,0 15,30 C 15,60 50,85 50,85 C 50,85 85,60 85,30 A 20,20 0 0,0 50,30 Z"/>
+        </svg>
+        <p style="color: #997788; font-size: 0.8rem; margin-top: 5px;">Move your finger or mouse over it — then tap it ♥</p>
+      </div>
+
+      <!-- Quiz -->
+      <div class="section-tag">A VERY SERIOUS TEST</div>
+      <div class="section-title">Love Quiz</div>
+      <div class="quiz-card">
+        <p style="font-weight: 500; margin-bottom: 15px;">Who loves you the most in the entire world?</p>
+        <div class="quiz-btn" onclick="selectQuiz(this)">My Girl 💕</div>
+        <div class="quiz-btn" onclick="selectQuiz(this)">Definitely My Girl 💖</div>
+        <div class="quiz-btn" onclick="selectQuiz(this)">Obviously My Girl 🌸</div>
+        <div class="quiz-btn" onclick="selectQuiz(this)">Always My Girl ✨</div>
+        <p id="quiz-response" style="margin-top: 15px; color: var(--pink-main); font-weight: 600; display: none;">Correct! She loves you more than anything in the world! 🧸💕</p>
+      </div>
+
+      <!-- LOVE MEMORY MATCH GAME -->
+      <div class="section-tag">PLAY WITH ME</div>
+      <div class="section-title">Match My Love ❤️</div>
+      <div style="text-align: center; font-size: 0.9rem; color: #775566; margin-bottom: 12px;">
+        Pairs Matched: <span id="memory-matches" style="font-weight: 600; color: var(--pink-main);">0</span> / 6
+      </div>
+      <div id="game-box">
+        <div class="memory-grid" id="memory-grid"></div>
+        <p id="memory-win-msg" style="text-align: center; margin-top: 20px; color: var(--pink-main); font-weight: 600; font-size: 1rem; display: none;">
+          Yay! You matched all my love! You win my whole heart! 💖🎉
+        </p>
+      </div>
+      <div style="text-align: center; margin-top: 15px;">
+        <button class="btn-pink" style="padding: 8px 22px; font-size: 0.85rem;" onclick="resetMemoryGame()">Restart Game 🔄</button>
+      </div>
+
+      <!-- Final Reveal Trigger -->
+      <div style="text-align: center; margin-top: 60px; margin-bottom: 40px;">
+        <div class="section-tag">ONE MORE THING</div>
+        <div class="section-title">Press it. I dare you.</div>
+        <button class="btn-pink" onclick="triggerFireworks()">Click Me 💕</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCENE 3: END FIREWORKS -->
+  <div id="end-screen">
+    <canvas id="fireworks-canvas"></canvas>
+    <div style="position: relative; z-index: 10;">
+      <p style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.8rem; color: var(--pink-soft); margin-bottom: 10px;">I'll love you today,<br>tomorrow,<br>and every day after.</p>
+      <h1 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #ffffff; margin-top: 15px;">Happy Boyfriend's Day 💕</h1>
+    </div>
+  </div>
+
+  <script>
+    /* AUDIO CONTROLS & AUTOPLAY */
+    let audioCtx;
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function initAudioOnInteraction() {
+      getAudioContext();
+    }
+
+    function startSongAndAudio() {
+      initAudioOnInteraction();
+      const audio = document.getElementById('bg-audio');
+      if (audio.paused) {
+        audio.play().catch(() => {});
+      }
+    }
+
+    // Try playing immediately when page loads
+    window.addEventListener('DOMContentLoaded', () => {
+      const audio = document.getElementById('bg-audio');
+      audio.play().catch(() => {
+        // Will start on first tap/click if browser blocks unmuted autoplay
+      });
+    });
+
+    function playSoundEffect(type) {
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        const now = ctx.currentTime;
+
+        if (type === 'countdown') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(440, now);
+          gain.gain.setValueAtTime(0.3, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+          osc.start(now);
+          osc.stop(now + 0.35);
+        } else if (type === 'text') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(659.25, now);
+          gain.gain.setValueAtTime(0.3, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+          osc.start(now);
+          osc.stop(now + 0.45);
+        } else if (type === 'heart') {
+          const osc2 = ctx.createOscillator();
+          const gain2 = ctx.createGain();
+          osc2.connect(gain2);
+          gain2.connect(ctx.destination);
+
+          osc.type = 'sine';
+          osc2.type = 'triangle';
+
+          osc.frequency.setValueAtTime(523.25, now);
+          osc2.frequency.setValueAtTime(783.99, now);
+
+          gain.gain.setValueAtTime(0.4, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.9);
+          
+          gain2.gain.setValueAtTime(0.3, now);
+          gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.9);
+
+          osc.start(now);
+          osc2.start(now);
+          osc.stop(now + 0.9);
+          osc2.stop(now + 0.9);
+        }
+      } catch (e) {}
+    }
+
+    /* MATRIX & SPARKLE HEART ANIMATION WITH RESPONSIVE SIZING */
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const matrixText = "I LOVE U ";
+    const fontSize = 16;
+    const columns = Math.floor(window.innerWidth / fontSize);
+    const drops = Array(columns).fill(1);
+
+    const sequence = ['3', '2', '1', 'You', 'Are', 'My', 'Love', 'HEART'];
+    let seqIndex = 0;
+    let currentParticles = [];
+
+    function generateTargetPoints(text) {
+      const offCanvas = document.createElement('canvas');
+      offCanvas.width = canvas.width;
+      offCanvas.height = canvas.height;
+      const offCtx = offCanvas.getContext('2d');
+
+      offCtx.fillStyle = 'white';
+      offCtx.textAlign = 'center';
+      offCtx.textBaseline = 'middle';
+
+      const isMobile = window.innerWidth < 600;
+
+      if (text === 'HEART') {
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        
+        // Responsive scaling for heart
+        const scale = isMobile 
+          ? Math.min(canvas.width, canvas.height) / 32  
+          : Math.min(canvas.width, canvas.height) / 22; 
+
+        offCtx.beginPath();
+        for (let t = 0; t < Math.PI * 2; t += 0.01) {
+          const x = 16 * Math.pow(Math.sin(t), 3);
+          const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+          const px = cx + x * scale;
+          const py = cy + y * scale;
+          offCtx.rect(px, py, 2.5, 2.5);
+        }
+        offCtx.fill();
+        
+        const heartTextSize = isMobile ? Math.floor(scale * 1.8) : Math.floor(scale * 2.2);
+        offCtx.font = `bold ${heartTextSize}px sans-serif`;
+        offCtx.fillText('I love u ♥', cx, cy);
+      } else {
+        // Responsive scaling for text countdown
+        const textMultiplier = isMobile ? 0.45 : 0.55;
+        const textFontSize = Math.min(canvas.width / (text.length * 0.8), canvas.height * textMultiplier);
+        
+        offCtx.font = `bold ${textFontSize}px sans-serif`;
+        offCtx.fillText(text, canvas.width / 2, canvas.height / 2);
+      }
+
+      const imgData = offCtx.getImageData(0, 0, canvas.width, canvas.height);
+      const points = [];
+      const step = isMobile ? 4 : 3;
+
+      for (let y = 0; y < canvas.height; y += step) {
+        for (let x = 0; x < canvas.width; x += step) {
+          const alpha = imgData.data[(y * canvas.width + x) * 4 + 3];
+          if (alpha > 128) {
+            points.push({ x: x, y: y });
+          }
+        }
+      }
+      return points;
+    }
+
+    function loadNextSequenceStep() {
+      if (seqIndex >= sequence.length) {
+        setTimeout(finishIntroAnimation, 1800);
+        return;
+      }
+
+      const currentText = sequence[seqIndex];
+      
+      if (['3', '2', '1'].includes(currentText)) {
+        playSoundEffect('countdown');
+      } else if (['You', 'Are', 'My', 'Love'].includes(currentText)) {
+        playSoundEffect('text');
+      } else if (currentText === 'HEART') {
+        playSoundEffect('heart');
+      }
+
+      const pts = generateTargetPoints(currentText);
+
+      while (currentParticles.length < pts.length) {
+        currentParticles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: 0,
+          vy: 0,
+          size: Math.random() * 2.5 + 1.8,
+          color: '#ffffff'
+        });
+      }
+      if (currentParticles.length > pts.length) {
+        currentParticles = currentParticles.slice(0, pts.length);
+      }
+
+      const isHeart = (currentText === 'HEART');
+
+      for (let i = 0; i < currentParticles.length; i++) {
+        currentParticles[i].tx = pts[i].x;
+        currentParticles[i].ty = pts[i].y;
+        currentParticles[i].color = isHeart ? '#ff0033' : '#ffffff';
+      }
+
+      seqIndex++;
+      const displayDuration = (currentText === 'HEART') ? 3500 : 1300;
+      setTimeout(loadNextSequenceStep, displayDuration);
+    }
+
+    let animId;
+    function drawMatrixIntro() {
+      ctx.fillStyle = 'rgba(5, 2, 7, 0.18)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = 'rgba(255, 77, 109, 0.35)';
+      ctx.font = `${fontSize}px monospace`;
+      for (let i = 0; i < drops.length; i++) {
+        const charIdx = (drops[i] + i) % matrixText.length;
+        const char = matrixText[charIdx];
+        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+
+      for (let i = 0; i < currentParticles.length; i++) {
+        const p = currentParticles[i];
+        p.x += (p.tx - p.x) * 0.12;
+        p.y += (p.ty - p.y) * 0.12;
+
+        ctx.fillStyle = p.color;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = p.color;
+        ctx.fillRect(p.x, p.y, p.size, p.size);
+        ctx.shadowBlur = 0;
+      }
+
+      animId = requestAnimationFrame(drawMatrixIntro);
+    }
+
+    drawMatrixIntro();
+    setTimeout(loadNextSequenceStep, 1000);
+
+    function finishIntroAnimation(e) {
+      if(e) e.stopPropagation();
+      cancelAnimationFrame(animId);
+      document.getElementById('matrix-screen').style.display = 'none';
+      document.getElementById('intro-screen').style.display = 'flex';
+      document.body.style.backgroundColor = 'var(--bg-dark)';
+      
+      const audio = document.getElementById('bg-audio');
+      if (audio.paused) {
+        audio.play().catch(() => {});
+      }
+    }
+
+    // MOUSE CURSOR HEART TRAIL EFFECT
+    document.addEventListener('mousemove', (e) => { createCursorHeart(e.clientX, e.clientY); });
+    document.addEventListener('touchmove', (e) => { createCursorHeart(e.touches[0].clientX, e.touches[0].clientY); });
+
+    function createCursorHeart(x, y) {
+      const h = document.createElement('div');
+      h.className = 'cursor-heart';
+      h.innerHTML = '♥';
+      h.style.left = x + 'px';
+      h.style.top = y + 'px';
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 1000);
+    }
+
+    // TRANSITIONS
+    function enterSite() {
+      document.getElementById('intro-screen').style.display = 'none';
+      document.body.style.backgroundColor = 'var(--bg-light)';
+      document.getElementById('main-wrapper').style.display = 'block';
+      
+      const audio = document.getElementById('bg-audio');
+      if (audio.paused) {
+        audio.play().catch(() => {});
+      }
+      initMemoryGame();
+    }
+
+    // Floating Particles
+    function spawnParticle() {
+      const root = document.getElementById('particle-root');
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.innerHTML = Math.random() > 0.4 ? '♥' : '🦋';
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.fontSize = (Math.random() * 12 + 10) + 'px';
+      p.style.color = Math.random() > 0.5 ? '#ff4d6d' : '#ff8fa3';
+      p.style.animationDuration = (Math.random() * 3 + 5) + 's';
+      root.appendChild(p);
+      setTimeout(() => p.remove(), 7000);
+    }
+    setInterval(spawnParticle, 500);
+
+    // Dynamic Live Counter
+    let seconds = 0;
+    setInterval(() => {
+      seconds++;
+      document.getElementById('cnt-secs').innerText = (seconds % 60).toString().padStart(2, '0');
+    }, 1000);
+
+    // SVG Heart Path Animation
+    function traceHeart() {
+      const path = document.getElementById('svg-heart-path');
+      path.style.strokeDashoffset = '0';
+    }
+
+    // Quiz Handler
+    function selectQuiz(btn) {
+      document.querySelectorAll('.quiz-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      document.getElementById('quiz-response').style.display = 'block';
+    }
+
+    /* LOVE MEMORY MATCH GAME SCRIPT */
+    const emojis = ['💖', '🧸', '🌹', '🍕', '💌', '👑'];
+    let cardsData = [...emojis, ...emojis];
+    let flippedCards = [];
+    let matchedCount = 0;
+    let lockBoard = false;
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function initMemoryGame() {
+      const grid = document.getElementById('memory-grid');
+      grid.innerHTML = '';
+      flippedCards = [];
+      matchedCount = 0;
+      lockBoard = false;
+      document.getElementById('memory-matches').innerText = '0';
+      document.getElementById('memory-win-msg').style.display = 'none';
+
+      const shuffled = shuffle([...cardsData]);
+      shuffled.forEach((emoji) => {
+        const card = document.createElement('div');
+        card.className = 'memory-card';
+        card.dataset.emoji = emoji;
+        card.innerHTML = `
+          <div class="memory-card-inner">
+            <div class="memory-card-front">❓</div>
+            <div class="memory-card-back">${emoji}</div>
+          </div>
+        `;
+        card.addEventListener('click', () => flipMemoryCard(card));
+        grid.appendChild(card);
+      });
+    }
+
+    function flipMemoryCard(card) {
+      if (lockBoard || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+
+      card.classList.add('flipped');
+      flippedCards.push(card);
+
+      if (flippedCards.length === 2) {
+        checkMemoryMatch();
+      }
+    }
+
+    function checkMemoryMatch() {
+      lockBoard = true;
+      const [card1, card2] = flippedCards;
+
+      if (card1.dataset.emoji === card2.dataset.emoji) {
+        card1.classList.add('matched');
+        card2.classList.add('matched');
+        matchedCount++;
+        document.getElementById('memory-matches').innerText = matchedCount;
+        flippedCards = [];
+        lockBoard = false;
+
+        if (matchedCount === 6) {
+          document.getElementById('memory-win-msg').style.display = 'block';
+          playSoundEffect('heart');
+        }
+      } else {
+        setTimeout(() => {
+          card1.classList.remove('flipped');
+          card2.classList.remove('flipped');
+          flippedCards = [];
+          lockBoard = false;
+        }, 850);
+      }
+    }
+
+    function resetMemoryGame() {
+      initMemoryGame();
+    }
+
+    // End Screen & Fireworks
+    function triggerFireworks() {
+      document.getElementById('end-screen').style.display = 'flex';
+      runFireworksCanvas();
+    }
+
+    function runFireworksCanvas() {
+      const fwCanvas = document.getElementById('fireworks-canvas');
+      const fwCtx = fwCanvas.getContext('2d');
+      fwCanvas.width = window.innerWidth;
+      fwCanvas.height = window.innerHeight;
+
+      let sparks = [];
+
+      function addBurst() {
+        const x = Math.random() * fwCanvas.width;
+        const y = Math.random() * (fwCanvas.height * 0.6);
+        for (let i = 0; i < 35; i++) {
+          const angle = (Math.PI * 2 / 35) * i;
+          const speed = Math.random() * 3 + 1.5;
+          sparks.push({
+            x: x, y: y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            life: 1,
+            color: `hsl(${Math.random() * 40 + 330}, 100%, 65%)`
+          });
+        }
+      }
+
+      setInterval(addBurst, 450);
+
+      function render() {
+        fwCtx.fillStyle = 'rgba(10, 5, 13, 0.2)';
+        fwCtx.fillRect(0, 0, fwCanvas.width, fwCanvas.height);
+
+        sparks.forEach((s, i) => {
+          s.x += s.vx;
+          s.y += s.vy;
+          s.life -= 0.015;
+
+          fwCtx.fillStyle = s.color;
+          fwCtx.globalAlpha = Math.max(0, s.life);
+          fwCtx.beginPath();
+          fwCtx.arc(s.x, s.y, 2.5, 0, Math.PI * 2);
+          fwCtx.fill();
+
+          if (s.life <= 0) {
+            sparks.splice(i, 1);
+          }
+        });
+
+        fwCtx.globalAlpha = 1;
+        requestAnimationFrame(render);
+      }
+
+      render();
+    }
+  </script>
+</body>
+</html>
